@@ -1,4 +1,6 @@
 version: 0.0
+# Target platform: Amazon Linux 2023 (dnf + systemd). The hook scripts
+# check /etc/os-release and fail on any other distribution.
 os: linux
 files:
   - source: /index.html

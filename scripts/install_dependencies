@@ -1,3 +1,12 @@
 #!/bin/bash
-yum install -y httpd
+set -euo pipefail
 
+# This sample targets Amazon Linux 2023. Fail early with a clear message
+# on any other platform instead of failing on a missing package manager.
+. /etc/os-release
+if [[ "${ID:-}" != "amzn" || "${VERSION_ID:-}" != "2023" ]]; then
+    echo "Unsupported OS: ${PRETTY_NAME:-unknown}. This sample requires Amazon Linux 2023." >&2
+    exit 1
+fi
+
+dnf install -y httpd
